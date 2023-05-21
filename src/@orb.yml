@@ -1,0 +1,7 @@
+version: 2.1
+
+description: |
+  Jobs and commands for integrating tracing-style spans into your circleci pipeline workflows, for use with honeycomb.io. 
+
+display:
+  source_url: "https://github.com/ThoughtWorks-DPS/orb-honeycomb-build-events"

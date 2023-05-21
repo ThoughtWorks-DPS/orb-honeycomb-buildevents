@@ -1,0 +1,29 @@
+# src/commands/start-trace.yaml
+
+description: |
+  Runs as a job all on its own at the very beginning of any job you wanwt to trace.
+  This job records a start time to the shared cache, to be used at the end of the
+  job to be traced.
+
+parameters:
+
+  # buildevents-install:
+  #   description: install the specified version
+  #   type: boolean
+  #   default: false
+  
+  # buildevents-version:
+  #   description: specify the installed buildevents version 
+  #   type: string
+  #   default: ""
+
+steps:
+  # - step for IF i need to install buildevents
+  - run:
+      name: record job start-time to workspace
+      command: |
+        mkdir -p buildevents-workspace
+        date +%s > buildevents-workspace/build_start
+  - persist_to_workspace:
+      root: buildevents-workspace
+      path: build_start

@@ -1,0 +1,52 @@
+# src/jobs/start.yaml
+
+description: Record a start-time in the circleci shared cache
+
+executor:
+  name: circleci-base-image
+  executor-image: << parameters.executor-image >>
+  resource-class: << parameters.resource-class >>
+shell: << parameters.shell >>
+
+parameters:
+
+  executor-image:
+    description: available override
+    type: string
+    default: docker.io/twdps/circleci-base-image:alpine-stable
+
+  shell:
+    description: default shell invocation. Override to support different shells or tools like 1password-cli
+    type: string
+    default: /bin/bash -eo pipefail
+
+  resource-class:
+    type: enum
+    enum: [small, medium, medium+, large, xlarge, 2xlarge, 2xlarge+]
+    default: medium
+
+  # buildevents-install:
+  #   description: install the specified version
+  #   type: boolean
+  #   default: false
+
+  # buildevents-version:
+  #   description: specify the installed buildevents version 
+  #   type: string
+  #   default: ""
+
+  # timeout:
+  #   description: Timeout after which we consider the build failed, in minutes. Should be at least double your longest expected build.
+  #   type: integer
+  #   default: 20
+
+  before-start:
+    description: Optional steps to run before start-trace commands
+    type: steps
+    default: []
+
+steps:
+  - when:
+      condition: << parameters.before-start >>
+      steps: << parameters.before-start >>
+  - start-trace

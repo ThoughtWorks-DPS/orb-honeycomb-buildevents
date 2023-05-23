@@ -24,6 +24,3 @@ steps:
       command: |
         mkdir -p buildevents-workspace
         date +%s > buildevents-workspace/build_start
-  - persist_to_workspace:
-      root: buildevents-workspace
-      path: build_start

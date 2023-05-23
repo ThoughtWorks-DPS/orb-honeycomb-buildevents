@@ -1,11 +1,6 @@
 # src/executors/circleci-base-image.yaml
 
-description: |
-  By default the orb will use twdps/circleci-base-image:alpine-stable as the executor image. 
-  You can override to use your own executor keeping in mind you will need sudo and curl on
-  the image to successfully install terraform. See the setup-packages command for details.
-  
-  See https://github.com/ThoughtWorks-DPS/circleci-base-image
+description: See https://github.com/ThoughtWorks-DPS/circleci-base-image
 
 parameters:
 
@@ -23,4 +18,3 @@ resource_class: << parameters.resource-class >>
 
 docker:
   - image: << parameters.executor-image >>
-

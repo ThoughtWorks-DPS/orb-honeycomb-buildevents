@@ -1,0 +1,28 @@
+# src/commands/stop-trace.yaml
+
+description: |
+  Runs as a job all on its own after the last job you want to span.
+  Will send:  buildevents build $BUILD_START $BUILD_ID `message`
+
+parameters:
+
+  build-message:
+    description: generally a success or failure message
+    type: string
+    default: success
+
+  # buildevents-install:
+  #   description: install the specified version
+  #   type: boolean
+  #   default: false
+  
+  # buildevents-version:
+  #   description: specify the installed buildevents version 
+  #   type: string
+  #   default: ""
+
+steps:
+  # - step for IF i need to install buildevents
+  - run:
+      name: send buildevents build with message
+      command: buildevents build $CIRCLE_BUILD_NUM $(cat buildevents-workspace/build_start) << parameters.build-message >>
